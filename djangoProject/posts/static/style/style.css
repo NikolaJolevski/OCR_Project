@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+}
+
+#heading {
+    color: white;
+    background: url("background2.jpg") no-repeat;
+    height: 200px;
+}
+.jumbotron {
+    background-color: transparent;
+}
+#imageUploader {
+    width: 455px;
+    display: inline-block;
+}
+
+hr {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    border: 1px solid rgb(150, 186, 202);
+}

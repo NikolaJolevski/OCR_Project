@@ -4,7 +4,7 @@ import pytesseract
 from PIL import Image
 
 # Path of working folder on Disk
-src_path = "C:/Users/Jole/PycharmProjects/Obrabotka_na_slika_domasna2/"
+src_path = "C:/Users/user/Desktop/OCR_Project/"
 
 def get_string(img_path):
     # Read image with opencv
@@ -29,10 +29,8 @@ def get_string(img_path):
 
     # Recognize text with tesseract for python
     result = pytesseract.image_to_string(Image.open(src_path + "thres.png"))
-
     # Remove template file
     #os.remove(temp)
-
     return result
 
 

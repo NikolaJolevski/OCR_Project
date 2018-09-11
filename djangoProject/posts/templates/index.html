@@ -3,36 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>OCR</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/style/style.css' %}">
 </head>
 <body>
-<h1>Optical character recognition</h1>
-{% block content %}
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="file" name="myfile">
-    <button type="submit">Upload</button>
-  </form>
-
-{% if text_from_img %}
-
-   <span>
-       {% load static %}
-       <img src="{% static image_src %}" height="400" width="400"  style="display: inline-block">
-
-   </span>
-
-
-   <span>
-
-    <span>TEXT FROM IMAGE:</span>
-     <textarea rows="25" cols="50">
-         {{text_from_img}}
-     </textarea>
-   </span>
-
-  {% endif %}
-
-
-{% endblock %}
+    <div class="container">
+        <div id="heading" class="row">
+            <div class="col-lg-12">
+                <h1 class="jumbotron text-center">Optical character recognition</h1>
+            </div>
+        </div>
+        {% block content %}
+        <form method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-lg-6">
+                          <div class="input-group-large mb-3">
+                            {% csrf_token %}
+                            <p for="imageUploader" class="text-secondary font-weight-light">Please choose your image:</p>
+                            <input id="imageUploader" type="file" name="myfile" class="form-control">
+                            <button type="submit" class="btn btn-light">Upload</button>
+                              {% if error_msg %}
+                            <p class="text-secondary font-weight-light">{{error_msg}}</p>
+                              {% endif %}
+                          </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <p for="langSelect" class="text-secondary font-weight-light">Please choose language:</p>
+                        <select class="form-control" id="langSelect" name="lang">
+                            {% for lang in lang_list %}
+                          <option value="{{lang.id}}">{{lang.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {% if text_from_img %}
+        <hr/>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-5">
+                   <span>
+                       <p class="text-secondary font-weight-light">The image:</p>
+                       {% load static %}
+                       <img src="{% static image_src %}" class="img-fluid img-thumbnail" height="400" width="400"
+                            style="display: inline-block;">
+                   </span>
+            </div>
+            <div class="col-5">
+                  <span>
+                    <p class="text-secondary font-weight-light">The text from the image:</p>
+                     <textarea rows="15" cols="60">
+                         {{text_from_img}}
+                     </textarea>
+                   </span>
+                  {% endif %}
+            </div>
+        </div>
+        {% endblock %}
+    </div>
 </body>
 </html>
