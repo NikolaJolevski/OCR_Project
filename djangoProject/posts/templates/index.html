@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OCR</title>
+</head>
+<body>
+<h1>Optical character recognition</h1>
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="myfile">
+    <button type="submit">Upload</button>
+  </form>
+
+{% if text_from_img %}
+
+   <span>
+       {% load static %}
+       <img src="{% static image_src %}" height="400" width="400"  style="display: inline-block">
+
+   </span>
+
+
+   <span>
+
+    <span>TEXT FROM IMAGE:</span>
+     <textarea rows="25" cols="50">
+         {{text_from_img}}
+     </textarea>
+   </span>
+
+  {% endif %}
+
+
+{% endblock %}
+</body>
+</html>
