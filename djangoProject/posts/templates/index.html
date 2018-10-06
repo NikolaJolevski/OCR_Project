@@ -19,6 +19,20 @@
                 <h1 class="jumbotron text-center">Optical character recognition</h1>
             </div>
         </div>
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px">
+            <div class="col-1">
+            </div>
+            <div class="col-2">
+                <p class="text-secondary font-weight-light">
+                Try with your camera:
+                </p>
+            </div>
+            <div class="col-2">
+                <a href="webcam" >  <input class="btn btn-primary" type="submit" value="Webcam"/></a>
+            </div>
+        </div>
+
+        <div class="row"></div>
         {% block content %}
         <form method="post" enctype="multipart/form-data">
             <div class="row">
@@ -27,7 +41,7 @@
                 <div class="col-lg-6">
                           <div class="input-group-large mb-3">
                             {% csrf_token %}
-                            <p for="imageUploader" class="text-secondary font-weight-light">Please choose your image:</p>
+                            <p for="imageUploader" class="text-secondary font-weight-light">Or please choose your image:</p>
                             <input id="imageUploader" type="file" name="myfile" class="form-control">
                             <button type="submit" class="btn btn-light">Upload</button>
                               {% if error_msg %}
@@ -47,8 +61,6 @@
                 </div>
             </div>
         </form>
-            <a href="webcam" >  <input class="btn btn-primary" type="submit" value="Webcam"/></a>
-
 
         {% if text_from_img %}
         <hr/>

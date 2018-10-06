@@ -1,11 +1,12 @@
 import cv2
 import numpy as np
 import pytesseract
+import os
 from PIL import Image
 import re
 
 # Path of working folder on Disk
-src_path = "C:/Users/Jole/PycharmProjects/Obrabotka_na_slika_domasna2/djangoProject/posts/static/"
+src_path = "C:/Users/user/Documents/GitHub/OCR_Project/djangoProject/posts/static/"
 
 def get_string(name, lang):
     img_path = src_path + name;
@@ -34,8 +35,9 @@ def get_string(name, lang):
     # Recognize text with tesseract for python
     result = pytesseract.image_to_string(Image.open(src_path + "thres.png"), lang=lang)
 
-    # Remove template file
-    #os.remove(temp)
+    # Remove the temporary images
+    os.remove(src_path + "thres.png")
+    os.remove(src_path + "removed_noise.png")
 
     # remove the empty lines
     filtered = "".join([s for s in result.splitlines(True) if s.strip("\r\n")])
@@ -45,4 +47,3 @@ def get_string(name, lang):
 
 
 print '--- Start recognize text from image ---'
-#print get_string(src_path + "test1.jpg")
